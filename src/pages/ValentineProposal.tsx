@@ -177,10 +177,7 @@ const ValentineProposal = () => {
     [noPosInitialized]
   );
 
-  /* initialise the button position once - DISABLED so it starts inline */
-  /* useEffect(() => {
-    if (!noPosInitialized) dodgeNo();
-  }, [dodgeNo, noPosInitialized]); */
+
 
   /* global mousemove – dodge when cursor approaches */
   useEffect(() => {
