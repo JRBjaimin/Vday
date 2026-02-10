@@ -11,10 +11,10 @@ const Index = () => {
     <div className="relative min-h-screen bg-background overflow-x-hidden">
       <FloatingHearts />
       <HeroSection />
-      <LoveStorySection />
-      <GiftCardsSection />
-      <LoveLetterSection />
-      <CountdownSection />
+      {/* <LoveStorySection /> */}
+      {/* <GiftCardsSection /> */}
+      {/* <LoveLetterSection /> */}
+      {/* <CountdownSection /> */}
       <FooterSection />
     </div>
   );

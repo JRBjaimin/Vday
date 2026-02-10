@@ -177,10 +177,10 @@ const ValentineProposal = () => {
     [noPosInitialized]
   );
 
-  /* initialise the button position once */
-  useEffect(() => {
+  /* initialise the button position once - DISABLED so it starts inline */
+  /* useEffect(() => {
     if (!noPosInitialized) dodgeNo();
-  }, [dodgeNo, noPosInitialized]);
+  }, [dodgeNo, noPosInitialized]); */
 
   /* global mousemove – dodge when cursor approaches */
   useEffect(() => {
@@ -436,18 +436,39 @@ const ValentineProposal = () => {
           <span className="text-valentine-pink italic">Valentine</span>?
         </motion.h1>
 
-        <motion.p
-          className="text-3xl md:text-5xl font-script text-valentine-gold text-glow-gold mt-2 mb-12"
-          initial={{ opacity: 0, scale: 0.8 }}
+        <motion.div
+          className="relative mt-6 mb-16 px-6 py-4"
+          initial={{ opacity: 0, scale: 0.5 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 1.2, type: "spring", bounce: 0.4 }}
+          transition={{ delay: 1.2, type: "spring", bounce: 0.5 }}
         >
-          ~ {name} ~
-        </motion.p>
+          <motion.div 
+            className="absolute inset-0 bg-gradient-to-r from-transparent via-valentine-rose/10 to-transparent blur-xl"
+            animate={{ opacity: [0.5, 0.8, 0.5] }}
+            transition={{ duration: 2, repeat: Infinity }}
+          />
+          <motion.h2
+            className="relative z-10 text-5xl md:text-7xl font-bold font-serif-display text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] via-[#FFF] to-[#D4AF37] drop-shadow-sm pb-2"
+            style={{ 
+              backgroundSize: "200% auto", 
+              textShadow: "0 2px 10px rgba(212, 175, 55, 0.5)" 
+            }}
+            animate={{ 
+              backgroundPosition: ["0% center", "200% center"],
+              scale: [1, 1.05, 1],
+            }}
+            transition={{ 
+              backgroundPosition: { duration: 3, repeat: Infinity, ease: "linear" },
+              scale: { duration: 2, repeat: Infinity, ease: "easeInOut" }
+            }}
+          >
+            ✨ {name} ✨
+          </motion.h2>
+        </motion.div>
 
         {/* buttons */}
         <motion.div
-          className="flex flex-col items-center gap-6"
+          className="flex flex-row items-center justify-center gap-8"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.6, duration: 0.8 }}
@@ -470,10 +491,9 @@ const ValentineProposal = () => {
           {/* NO button – dodges when cursor approaches (proximity-based) */}
           <motion.button
             ref={noBtnRef}
-            animate={{ left: noPos.x, top: noPos.y }}
+            animate={noPosInitialized ? { left: noPos.x, top: noPos.y } : {}}
             transition={{ type: "spring", stiffness: 400, damping: 25 }}
-            className="fixed px-10 py-4 rounded-full bg-muted/60 text-muted-foreground font-semibold text-lg border border-border/50 backdrop-blur-sm pointer-events-none select-none"
-            style={{ zIndex: 40 }}
+            className={`px-10 py-4 rounded-full bg-muted/60 text-muted-foreground font-semibold text-lg border border-border/50 backdrop-blur-sm select-none ${noPosInitialized ? "fixed z-40" : "relative"}`}
           >
             No 😢
           </motion.button>
@@ -486,9 +506,10 @@ const ValentineProposal = () => {
           animate={{ opacity: 1 }}
           transition={{ delay: 2.2 }}
         >
-          (psst… there's really only one answer 😏)
+          (because my heart only beats for you! �)
         </motion.p>
       </div>
+
 
       {/* confetti overlay */}
       <AnimatePresence>{showConfetti && <Confetti />}</AnimatePresence>

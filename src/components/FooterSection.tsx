@@ -22,23 +22,7 @@ const FooterSection = () => {
             Spread the Love
           </p>
 
-          <div className="flex justify-center gap-6 mb-8">
-            {[Instagram, Twitter, Facebook].map((Icon, i) => (
-              <motion.a
-                key={i}
-                href="#"
-                whileHover={{ scale: 1.2, y: -4 }}
-                whileTap={{ scale: 0.9 }}
-                className="w-12 h-12 rounded-full bg-card border border-border/50 flex items-center justify-center text-muted-foreground hover:text-valentine-rose hover:border-valentine-rose/50 transition-colors duration-300"
-              >
-                <Icon size={20} />
-              </motion.a>
-            ))}
-          </div>
 
-          <p className="text-muted-foreground text-sm">
-            Made with <span className="text-valentine-rose">❤️</span> for Valentine's Day 2026
-          </p>
         </motion.div>
       </div>
     </footer>
