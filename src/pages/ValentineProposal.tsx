@@ -2,6 +2,7 @@ import { useState, useCallback, useRef, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Heart, Sparkles, Stars, PartyPopper } from "lucide-react";
+import LoveLetterSection from "@/components/LoveLetterSection";
 
 /* ───── tiny helpers ───── */
 const randomBetween = (min: number, max: number) =>
@@ -363,7 +364,7 @@ const ValentineProposal = () => {
   return (
     <div
       ref={containerRef}
-      className="relative min-h-screen overflow-hidden gradient-valentine flex items-center justify-center"
+      className="relative min-h-screen overflow-x-hidden gradient-valentine"
     >
       <PulsingHearts />
 
@@ -388,131 +389,134 @@ const ValentineProposal = () => {
         />
       ))}
 
-      <div className="relative z-10 text-center px-4 max-w-2xl mx-auto">
-        {/* animated heart with sparkle ring */}
-        <motion.div
-          className="relative inline-block mb-8"
-          initial={{ scale: 0, rotate: -180 }}
-          animate={{ scale: 1, rotate: 0 }}
-          transition={{ type: "spring", duration: 1.5, bounce: 0.5 }}
-        >
-          <SparkleRing />
+      <LoveLetterSection />
+
+      <div className="min-h-screen flex items-center justify-center relative z-10 pb-20">
+        <div className="text-center px-4 max-w-2xl mx-auto">
+          {/* animated heart with sparkle ring */}
           <motion.div
-            animate={{
-              scale: [1, 1.15, 1],
-            }}
-            transition={{ duration: 1.2, repeat: Infinity }}
+            className="relative inline-block mb-8"
+            initial={{ scale: 0, rotate: -180 }}
+            animate={{ scale: 1, rotate: 0 }}
+            transition={{ type: "spring", duration: 1.5, bounce: 0.5 }}
           >
-            <Heart
-              className="text-valentine-pink drop-shadow-2xl"
-              size={100}
-              fill="hsl(330, 80%, 70%)"
-              strokeWidth={1}
-            />
+            <SparkleRing />
+            <motion.div
+              animate={{
+                scale: [1, 1.15, 1],
+              }}
+              transition={{ duration: 1.2, repeat: Infinity }}
+            >
+              <Heart
+                className="text-valentine-pink drop-shadow-2xl"
+                size={100}
+                fill="hsl(330, 80%, 70%)"
+                strokeWidth={1}
+              />
+            </motion.div>
           </motion.div>
-        </motion.div>
 
-        {/* title */}
-        <motion.p
-          className="font-script text-2xl md:text-3xl text-valentine-gold text-glow-gold mb-4"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5, duration: 0.8 }}
-        >
-          A Special Question...
-        </motion.p>
-
-        <motion.h1
-          className="text-4xl md:text-6xl lg:text-7xl font-bold font-serif-display text-primary-foreground text-glow mb-4 leading-tight"
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.8, duration: 1 }}
-        >
-          Will you be my
-          <br />
-          <span className="text-valentine-pink italic">Valentine</span>?
-        </motion.h1>
-
-        <motion.div
-          className="relative mt-6 mb-16 px-6 py-4"
-          initial={{ opacity: 0, scale: 0.5 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 1.2, type: "spring", bounce: 0.5 }}
-        >
-          <motion.div 
-            className="absolute inset-0 bg-gradient-to-r from-transparent via-valentine-rose/10 to-transparent blur-xl"
-            animate={{ opacity: [0.5, 0.8, 0.5] }}
-            transition={{ duration: 2, repeat: Infinity }}
-          />
-          <motion.h2
-            className="relative z-10 text-5xl md:text-7xl font-bold font-serif-display text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] via-[#FFF] to-[#D4AF37] drop-shadow-sm pb-2"
-            style={{ 
-              backgroundSize: "200% auto", 
-              textShadow: "0 2px 10px rgba(212, 175, 55, 0.5)" 
-            }}
-            animate={{ 
-              backgroundPosition: ["0% center", "200% center"],
-              scale: [1, 1.05, 1],
-            }}
-            transition={{ 
-              backgroundPosition: { duration: 3, repeat: Infinity, ease: "linear" },
-              scale: { duration: 2, repeat: Infinity, ease: "easeInOut" }
-            }}
+          {/* title */}
+          <motion.p
+            className="font-script text-2xl md:text-3xl text-valentine-gold text-glow-gold mb-4"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5, duration: 0.8 }}
           >
-            ✨ {name} ✨
-          </motion.h2>
-        </motion.div>
+            A Special Question...
+          </motion.p>
 
-        {/* buttons */}
-        <motion.div
-          className="flex flex-row items-center justify-center gap-8"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.6, duration: 0.8 }}
-        >
-          {/* YES button */}
-          <motion.button
-            onClick={handleYes}
-            whileHover={{ scale: 1.12 }}
-            whileTap={{ scale: 0.92 }}
-            className="px-14 py-5 rounded-full bg-gradient-to-r from-valentine-rose via-valentine-pink to-valentine-rose text-white font-bold text-2xl box-glow hover:brightness-110 transition-all duration-300 shadow-2xl relative overflow-hidden"
+          <motion.h1
+            className="text-4xl md:text-6xl lg:text-7xl font-bold font-serif-display text-primary-foreground text-glow mb-4 leading-tight"
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.8, duration: 1 }}
           >
-            <motion.span
-              className="absolute inset-0 bg-white/20 rounded-full"
-              animate={{ x: ["-100%", "200%"] }}
-              transition={{ duration: 2, repeat: Infinity, repeatDelay: 1 }}
+            Will you be my
+            <br />
+            <span className="text-valentine-pink italic">Valentine</span>?
+          </motion.h1>
+
+          <motion.div
+            className="relative mt-6 mb-16 px-6 py-4"
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 1.2, type: "spring", bounce: 0.5 }}
+          >
+            <motion.div 
+              className="absolute inset-0 bg-gradient-to-r from-transparent via-valentine-rose/10 to-transparent blur-xl"
+              animate={{ opacity: [0.5, 0.8, 0.5] }}
+              transition={{ duration: 2, repeat: Infinity }}
             />
-            <span className="relative z-10">Yes! 💖</span>
-          </motion.button>
+            <motion.h2
+              className="relative z-10 text-5xl md:text-7xl font-bold font-serif-display text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] via-[#FFF] to-[#D4AF37] drop-shadow-sm pb-2"
+              style={{ 
+                backgroundSize: "200% auto", 
+                textShadow: "0 2px 10px rgba(212, 175, 55, 0.5)" 
+              }}
+              animate={{ 
+                backgroundPosition: ["0% center", "200% center"],
+                scale: [1, 1.05, 1],
+              }}
+              transition={{ 
+                backgroundPosition: { duration: 3, repeat: Infinity, ease: "linear" },
+                scale: { duration: 2, repeat: Infinity, ease: "easeInOut" }
+              }}
+            >
+              ✨ {name} ✨
+            </motion.h2>
+          </motion.div>
 
-          {/* NO button – dodges when cursor approaches (proximity-based) */}
-          <motion.button
-            ref={noBtnRef}
-            animate={noPosInitialized ? { left: noPos.x, top: noPos.y } : {}}
-            transition={{ type: "spring", stiffness: 400, damping: 25 }}
-            className={`px-10 py-4 rounded-full bg-muted/60 text-muted-foreground font-semibold text-lg border border-border/50 backdrop-blur-sm select-none ${noPosInitialized ? "fixed z-40" : "relative"}`}
+          {/* buttons */}
+          <motion.div
+            className="flex flex-row items-center justify-center gap-8"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.6, duration: 0.8 }}
           >
-            No 😢
-          </motion.button>
-        </motion.div>
+            {/* YES button */}
+            <motion.button
+              onClick={handleYes}
+              whileHover={{ scale: 1.12 }}
+              whileTap={{ scale: 0.92 }}
+              className="px-14 py-5 rounded-full bg-gradient-to-r from-valentine-rose via-valentine-pink to-valentine-rose text-white font-bold text-2xl box-glow hover:brightness-110 transition-all duration-300 shadow-2xl relative overflow-hidden"
+            >
+              <motion.span
+                className="absolute inset-0 bg-white/20 rounded-full"
+                animate={{ x: ["-100%", "200%"] }}
+                transition={{ duration: 2, repeat: Infinity, repeatDelay: 1 }}
+              />
+              <span className="relative z-10">Yes! 💖</span>
+            </motion.button>
 
-        {/* decorative text */}
-        <motion.p
-          className="mt-10 text-valentine-blush/50 text-sm italic"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 2.2 }}
-        >
-          (because my heart only beats for you! �)
-        </motion.p>
+            {/* NO button – dodges when cursor approaches (proximity-based) */}
+            <motion.button
+              ref={noBtnRef}
+              animate={noPosInitialized ? { left: noPos.x, top: noPos.y } : {}}
+              transition={{ type: "spring", stiffness: 400, damping: 25 }}
+              className={`px-10 py-4 rounded-full bg-muted/60 text-muted-foreground font-semibold text-lg border border-border/50 backdrop-blur-sm select-none ${noPosInitialized ? "fixed z-40" : "relative"}`}
+            >
+              No 😢
+            </motion.button>
+          </motion.div>
+
+          {/* decorative text */}
+          <motion.p
+            className="mt-10 text-valentine-blush/50 text-sm italic"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 2.2 }}
+          >
+            because my heart only beats for you! 💖
+          </motion.p>
+        </div>
       </div>
-
 
       {/* confetti overlay */}
       <AnimatePresence>{showConfetti && <Confetti />}</AnimatePresence>
 
       {/* bottom gradient */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent" />
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent pointer-events-none" />
     </div>
   );
 };
