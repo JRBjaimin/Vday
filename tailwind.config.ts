@@ -55,6 +55,14 @@ export default {
           gold: "hsl(var(--valentine-gold))",
           blush: "hsl(var(--valentine-blush))",
         },
+        neon: {
+          blue: "hsl(var(--neon-blue))",
+          purple: "hsl(var(--neon-purple))",
+          green: "hsl(var(--neon-green))",
+        },
+        party: {
+          bg: "hsl(var(--party-bg))",
+        },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",

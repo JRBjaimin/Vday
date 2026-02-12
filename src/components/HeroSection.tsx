@@ -4,7 +4,11 @@ import { motion } from "framer-motion";
 import { Heart } from "lucide-react";
 import { toast } from "sonner";
 
-const HeroSection = () => {
+interface HeroSectionProps {
+  onToggleSingle?: () => void;
+}
+
+const HeroSection = ({ onToggleSingle }: HeroSectionProps) => {
   const [name, setName] = useState("");
   const navigate = useNavigate();
 
@@ -108,30 +112,43 @@ const HeroSection = () => {
         </motion.div>
 
         <div className="flex flex-col md:flex-row gap-4 justify-center items-center">
-          <motion.button
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.3, duration: 0.6 }}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={handleSend}
-            disabled={!name.trim()}
-            className="px-10 py-4 rounded-full bg-valentine-gold text-accent-foreground font-bold text-lg box-glow-gold hover:brightness-110 transition-all duration-300 disabled:opacity-40 disabled:cursor-not-allowed"
+            className="flex flex-col md:flex-row gap-4 w-full md:w-auto"
           >
-            Send Your Love ♥
-          </motion.button>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={handleSend}
+              disabled={!name.trim()}
+              className="px-8 py-4 rounded-full bg-valentine-gold text-accent-foreground font-bold text-lg box-glow-gold hover:brightness-110 transition-all duration-300 disabled:opacity-40 disabled:cursor-not-allowed min-w-[200px]"
+            >
+              Send Your Love ♥
+            </motion.button>
 
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={handleCopyLink}
+              disabled={!name.trim()}
+              className="px-8 py-4 rounded-full bg-white/10 backdrop-blur-sm border-2 border-valentine-gold/50 text-valentine-gold font-bold text-lg hover:bg-white/20 transition-all duration-300 disabled:opacity-40 disabled:cursor-not-allowed min-w-[200px]"
+            >
+              Copy Link 🔗
+            </motion.button>
+          </motion.div>
+          
           <motion.button
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.4, duration: 0.6 }}
+            transition={{ delay: 1.5, duration: 0.6 }}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            onClick={handleCopyLink}
-            disabled={!name.trim()}
-            className="px-10 py-4 rounded-full bg-white/10 backdrop-blur-sm border-2 border-valentine-gold/50 text-valentine-gold font-bold text-lg hover:bg-white/20 transition-all duration-300 disabled:opacity-40 disabled:cursor-not-allowed"
+            onClick={onToggleSingle}
+            className="px-8 py-4 rounded-full bg-gradient-to-r from-purple-500 to-indigo-600 text-white font-bold text-lg box-glow hover:brightness-110 transition-all duration-300 min-w-[200px] border-2 border-white/20"
           >
-            Copy Link 🔗
+            Single Mode 🤘
           </motion.button>
         </div>
       </div>
