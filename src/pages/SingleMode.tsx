@@ -170,7 +170,7 @@ const MainContent = ({ onParty, onBack }: { onParty: () => void, onBack: () => v
     </>
   );
 
-const SingleMode = ({ onBack }: { onBack: () => void }) => {
+const SingleMode = ({ onBack, songUrl }: { onBack: () => void; songUrl?: string | null }) => {
   const [partyActive, setPartyActive] = useState(false);
   const [fireActive, setFireActive] = useState(true);
   const [isMuted, setIsMuted] = useState(false);
@@ -184,7 +184,7 @@ const SingleMode = ({ onBack }: { onBack: () => void }) => {
 
   useEffect(() => {
     // Play Rock/Disco music on mount
-    const audio = new Audio("/rock_music.mp3"); 
+    const audio = new Audio(songUrl || "/rock_music.mp3"); 
     audio.loop = true;
     audio.volume = 0.5;
     audioRef.current = audio;
@@ -207,7 +207,7 @@ const SingleMode = ({ onBack }: { onBack: () => void }) => {
       audio.pause();
       audioRef.current = null;
     };
-  }, []);
+  }, [songUrl]);
 
   const toggleMute = () => {
     if (audioRef.current) {
